@@ -83,8 +83,8 @@ class _DashBoardState extends State<DashBoard> {
           padding: const EdgeInsets.all(30.0),
           child: Text(
             "DashBoard",
-            style: GoogleFonts.comfortaa(
-                fontSize: 45, fontWeight: FontWeight.w900),
+            style:
+                GoogleFonts.lobster(fontSize: 45, fontWeight: FontWeight.w900),
           ),
         ),
         Row(
@@ -162,7 +162,7 @@ class _DashBoardState extends State<DashBoard> {
                                     fontSize: 15, color: Colors.green),
                               ),
                               Obx(() => Text(
-                                  "${String.fromCharCodes(Runes('\u0024'))}${cartController.totalrevenue}",
+                                  "Rs ${cartController.totalrevenue}",
                                   style: GoogleFonts.lato(
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w700,

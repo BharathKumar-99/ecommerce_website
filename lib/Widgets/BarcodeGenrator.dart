@@ -16,6 +16,7 @@ class _CreateProductState extends State<CreateProduct> {
   TextEditingController productnamectl = TextEditingController();
   TextEditingController productpricectl = TextEditingController();
   TextEditingController productdescriptionctl = TextEditingController();
+  var iamgeselected = "Please Select an Image";
   var image;
   File _file = File("zz");
   Uint8List webImage = Uint8List(10);
@@ -27,6 +28,7 @@ class _CreateProductState extends State<CreateProduct> {
       setState(() {
         _file = File("a");
         webImage = f;
+        iamgeselected = image.name;
       });
     } else {}
   }
@@ -85,11 +87,19 @@ class _CreateProductState extends State<CreateProduct> {
                             border: OutlineInputBorder()),
                       ),
                       const SizedBox(height: 25),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: ElevatedButton(
-                            onPressed: _getphoto,
-                            child: const Text("Choose Photo")),
+                      Row(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: ElevatedButton(
+                                onPressed: _getphoto,
+                                child: const Text("Choose Photo")),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(iamgeselected)
+                        ],
                       ),
                       const SizedBox(height: 25),
                       SizedBox(
