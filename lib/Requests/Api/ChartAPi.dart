@@ -30,7 +30,6 @@ class ProductApi {
       http.Response response =
           await http.get(Uri.parse(Connection.getdaysales));
       responsestring = response.body;
-      print(response.body);
     } catch (e) {
       Get.snackbar(
         "Error",

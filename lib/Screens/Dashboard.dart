@@ -84,7 +84,7 @@ class _DashBoardState extends State<DashBoard> {
           child: Text(
             "DashBoard",
             style:
-                GoogleFonts.lobster(fontSize: 45, fontWeight: FontWeight.w900),
+                GoogleFonts.lato(fontSize: 45, fontWeight: FontWeight.w900),
           ),
         ),
         Row(

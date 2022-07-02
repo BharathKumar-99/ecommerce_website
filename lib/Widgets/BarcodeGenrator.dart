@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:ecommerce_website/Requests/Api/CreateproductApi.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +18,7 @@ class _CreateProductState extends State<CreateProduct> {
   TextEditingController productnamectl = TextEditingController();
   TextEditingController productpricectl = TextEditingController();
   TextEditingController productdescriptionctl = TextEditingController();
+  TextEditingController productquantityctl = TextEditingController();
   var iamgeselected = "Please Select an Image";
   var image;
   File _file = File("zz");
@@ -33,6 +36,27 @@ class _CreateProductState extends State<CreateProduct> {
     } else {}
   }
 
+  int barcodegenerator() {
+    var rng = Random();
+    int generatedNumber = 0;
+    for (int i = 0; i < 15; i++) {
+      generatedNumber += (rng.nextInt(9) + 1);
+    }
+
+    return generatedNumber;
+  }
+
+  Future _createproduct() async {
+    int barcode = barcodegenerator();
+    await CreateproductApi.createproduct(
+        productnamectl.text.toString(),
+        productdescriptionctl.text.toString(),
+        int.parse(productpricectl.text),
+        int.parse(productquantityctl.text),
+        webImage,
+        barcode);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +69,7 @@ class _CreateProductState extends State<CreateProduct> {
           backgroundColor: Colors.transparent,
           body: Center(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.5,
               child: Card(
                 shape: RoundedRectangleBorder(
@@ -59,7 +83,7 @@ class _CreateProductState extends State<CreateProduct> {
                       Center(
                         child: Text(
                           "Bar Code Generator",
-                          style: GoogleFonts.titanOne(fontSize: 25),
+                          style: GoogleFonts.lato(fontSize: 25),
                         ),
                       ),
                       const SizedBox(height: 25),
@@ -87,6 +111,14 @@ class _CreateProductState extends State<CreateProduct> {
                             border: OutlineInputBorder()),
                       ),
                       const SizedBox(height: 25),
+                      TextField(
+                        controller: productquantityctl,
+                        style: GoogleFonts.lato(),
+                        decoration: const InputDecoration(
+                            hintText: "Product quantity",
+                            border: OutlineInputBorder()),
+                      ),
+                      const SizedBox(height: 25),
                       Row(
                         children: [
                           Align(
@@ -105,7 +137,7 @@ class _CreateProductState extends State<CreateProduct> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: _createproduct,
                             child: const Text("Create Product")),
                       ),
                     ],

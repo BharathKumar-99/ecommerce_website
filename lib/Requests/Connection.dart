@@ -8,4 +8,6 @@ class Connection {
   static const String getdaysales = "$_host/api/getdaybar";
   static const String getmonthsales = "$_host/api/getmonthbar";
   static const String getyearsales = "$_host/api//getyearbar";
+  static const String createproduct = "$_host/web/setproduct";
+  static const String uplaodpic = "$_host/web/uploadpic";
 }
